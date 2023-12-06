@@ -1,0 +1,25 @@
+<%- include ('./header') %>
+<div class="body d-flex">
+    <div id="sidemenu">
+<%- include('./sidebar', {type}) %>
+</div>
+<section style="flex: 1 0 auto">
+    <div class=" mx-auto items d-flex flex-wrap">
+    <% for(let product of specificCategory) { %>
+        <div class="m-2 p-2 rounded-2 bg-white text-center">
+            <a href=<%= `/product?id=${product._id}` %>><img style="width:200px; height:200px" src="<%= product.Img %>" alt="" class=" mx-auto img-fluid"></a>
+            <a href=<%= `/product?id=${product._id}` %> class="d-block text-decoration-none text-secondary fw-bold"><%= product.Title %></a>
+            <p class="text-secondary" style="font-size: 0.8rem">Category: <%= product.Category %></p>
+            <p class="text-color-orange">$ <%= product.Price %></p>
+        </div>
+        <% } %>
+    </div>
+</section>
+<style>
+     .items{
+        max-width: 80vw;
+    }
+ 
+</style>
+</div>
+<%- include ('./footer') %>

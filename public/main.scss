@@ -1,0 +1,23 @@
+$primary: #E3E6E6;
+$secondary: #131921;
+$container-max-widths: (
+    sm: 600px,
+    md: 800px,
+    lg: 1050px,
+    xl: 1200px,
+    xxl: 1500px
+);
+
+@import '../node_modules/bootstrap/scss/_functions';
+@import '../node_modules/bootstrap/scss/_variables';
+
+$custom-colors: (
+    "navtwo": #232F3E,
+    "color-red": #fd1d1d,
+    "color-orange": #FF9900,
+    "color-blue": #0066CE
+);
+
+$theme-colors: map-merge( $custom-colors, $theme-colors);
+
+@import '../node_modules/bootstrap/scss/bootstrap';

@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.carousel-item img{
+    height: 50vh;
+}
+.products {
+    margin-top: -30vh;
+}
+
+.frequent img{
+    height: 100px;
+}
+.right-content .view-browsing{
+    width:50px;
+    overflow: hidden;
+}
+.footer-icons span select{
+    max-width: 120px;
+}
+.frequent-items button{
+    padding: 0;
+    margin: 0;
+    width: 50px;
+}
+.carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        color:black;
+    }
+    .sell-body img{
+        z-index: 2;
+    }
+    .sell-body .wave {
+        z-index: 1;
+        margin-top: -70px;
+    }
+    .card-image{
+        height: 700px;
+        width: 500px;
+        border-radius: 15px;
+    }
+    .form-section{
+        height: 100vh;
+    }
+    .hr-line {
+        text-align: center;
+        width:100%;
+        position: relative;
+    }
+    .hr-line::before,
+    .hr-line::after {
+        content: '';
+        width: 30%;
+        height: 1px;
+        background-color: black;
+        position: absolute;
+    }
+    .hr-line::before {
+        top: 50%;
+        left: 0px;
+    }
+    .hr-line::after {
+        top: 50%;
+        right: 0px;
+    }
+   
+
+@media screen and (max-width:1200px) {
+    .body1{
+        margin: 0;
+    
+    }
+    .body1 .container {
+       margin: 0;
+       padding: 0;
+        min-width: 100%;
+       
+    }
+    .body-header .container .mid-text p{
+        width: 50%;
+    }
+    .sell-body2 .card-image{
+        height: 700px;
+        min-width: 700px;
+    }
+
+    
+    
+}

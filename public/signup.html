@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section class="form-section  d-flex flex-column justify-content-center">
+        <div class="container mx-auto" style="width: 500px">
+            <div class="fs-2 mx-auto text-center">
+                <img class="mx-auto d-inline img-fluid" src="https://m.media-amazon.com/images/G/01/rainier/nav/SellerCentral_Bliss._CB485924389_.png" alt=""><!--<span class="ms-3">Seller Central</span>-->
+            </div>
+            <div class="border border-1 rounded-2 p-5 mx-auto">
+                <div class="container mx-auto">
+                    <p class="fs-2">Get Started Selling on Amazon</p>
+                    <form>
+                        <div class="name-data">
+                            <div><label class="fw-bold" for="username">Username</label></div>
+                            <input class="w-100" type="text" name="user-name" id="user-name">
+                        </div>
+                        <div class="email">
+                            <div><label class="fw-bold" for="username">Email or mobile phone number</label></div>
+                            <input class="w-100" type="email" name="user-email" id="user-email">
+                        </div>
+                        <div class="password">
+                            <div class="d-flex justify-content-between align-items-end"><label class="fw-bold" for="password">Password</label></div>
+
+                            <input class="w-100" type="password" name="password" id="user-password">
+                            <div><p> Password must be atleast 6 characters </p></div>
+                        </div>
+                        <div class="password">
+                            <div class="d-flex justify-content-between align-items-end"><label class="fw-bold" for="password">Re-enter Password</label></div>
+
+                            <input class="w-100" type="password" name="password" id="password-confirm">
+                        </div>
+                        <input id="user-submit" class=" btn border-0 rounded-2 mt-3 w-100 bg-color-orange text-black" type="submit" value="Next">
+                    </form>
+                    <div class="others my-4">
+                        <hr class="shadow">
+                        <span>Already have an account?</span>
+                        <span class="details"><a href="signin.html" class="text-color-blue">Next<i class="bi bi-caret-right-fill"></i></a></span>
+                        
+
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-5">
+            <p class="fw-bold" style="font-size: 0.7rem">&copy; 1996-2023, Amazon.com, Inc. or its affiliates</p>
+        </div>
+    </div>
+    </section>
+
+    <script src="signup-script.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+</body>
+</html>

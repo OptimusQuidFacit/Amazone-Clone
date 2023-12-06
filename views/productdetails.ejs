@@ -1,0 +1,108 @@
+<%- include('./header') %>
+<main class="d-flex">
+<div id="sidemenu">
+    <%- include('./sidebar') %>
+    </div>
+
+<section>
+    <div class="m-5 productdetails-body">
+        <div class="mx-auto bg-white p-5 rounded-3">
+            <div class="heading">
+                <h1 class="fs-1"><%= product.Title %></h1>
+
+                <hr>
+            </div>
+            <div class="body-text d-flex align-items-center">
+                <div class="image-data"><img class="rounded-3" src=<%= product.Img %> alt=""></div>
+                <div class="ms-2">
+                    <p><span class="fw-bold">Category: </span><%= product.Category %></p>
+                    <p class=""><span class="fw-bold">Description: </span><%= product.Description %></p>
+                    <div><p class="me-3 text-color-blue" id="in-stock">In stock</p> <span></span></div>
+                    <div class="mx-3 btns"><a data-id="<%=product._id%>" class=" buy-link btn btn-secondary">Buy Product</a>
+                      
+                    <a class="delete-link btn btn-color-red" data-id="<%=product._id%>">Delete Product</a>
+                        
+                       <span class="fw-bold">Qty</span> <input style="width:20px" placeholder="1" type="text" name="quantity" id="qty"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <style>
+        .hidden{
+            display: none;
+        }
+        .image-data img{
+            width:200px;
+            height:200px;
+        }
+    </style>
+    <script>
+
+        
+        /*const href= document.querySelector('.buy-link').href;
+        document.querySelector('.buy-link').onclick=(e)=>{
+            const quantity=document.querySelector('#qty').value ? document.querySelector('#qty').value: 1;
+            document.querySelector('.buy-link').href =href +`${quantity}`;
+        }*/
+        const item="<%=product%>";
+        const buyBtn=document.querySelector('.buy-link');
+        document.querySelector('.buy-link').onclick=(e)=>{
+
+            e.preventDefault();
+        const quantity=document.querySelector('#qty').value ? document.querySelector('#qty').value: 1;
+        let userId=localStorage.getItem('authId');
+        let userToken=localStorage.getItem('authToken');
+        let  url=   userToken ? `/buy/${userId.toString()}?id=${buyBtn.getAttribute('data-id')}&qty=${quantity}`:"";
+        let geturl = userToken ? `/buy/${userId.toString()}`:"";
+        
+        let options={
+            method:'POST',
+            headers:{
+                'Content-type': 'application/json',
+                'token': `Bearer ${userToken?userToken.toString():""}`
+        },}
+            fetch(url, options).then(res=>{
+                if(res.ok)
+                window.location.href=geturl;
+            else{
+                alert("Please Login")
+            }
+            })
+        }
+        let deleteBtn = document.querySelector('.delete-link');
+        deleteBtn.onclick=(e)=>{
+            e.preventDefault();
+            let userToken=localStorage.getItem('authToken');
+            let userId=localStorage.getItem('authId');
+            let url=`/products/delete/${userId.toString()}?id=${deleteBtn.getAttribute("data-id")}`
+            let options={
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json',
+                'token': `Bearer ${userToken.toString()}`
+                },
+            }
+            fetch(url, options).then(res=>{
+            if(res.ok){
+                geturl=`/product?id=${this.getAttribute("data-id")}`
+                window.location.href=geturl;
+            }}
+            );
+        }
+        document.querySelector('.product').onclick=()=>{
+        const sideMenu =document.querySelector('#sidemenu');
+            if (sideMenu.classList.contains('hidden')) {
+        sideMenu.classList.remove('hidden');
+      } else {
+        sideMenu.classList.add('hidden');
+      }
+        }
+    </script>
+    </main>
+    
+<%- include ('./footer') %>

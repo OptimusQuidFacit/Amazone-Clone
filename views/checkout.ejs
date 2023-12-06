@@ -1,0 +1,60 @@
+<%- include('./header') %>
+
+<section>
+    <div class="container">
+        <div style="width: 500px;" class="checkout-box mx-auto p-3 bg-white">
+            <h1>Summary</h1>
+            <hr>
+            <div class="items row row-cols-3 gy-2">
+                <span class="col fw-bold">Product</span>
+                <span class="col fw-bold">Qty</span>
+                <span class="col fw-bold">Total</span>
+            
+              <% for( let item of items ) { %>
+                
+                   <!-- <div class="d-flex justify-content-between"> -->
+                     <span class="col"><%= item.Title %></span>
+                     <span class="col"><%= item.Quantity %></span>
+                     <span class="col">$<%= item.Price * item.Quantity %></span>
+                    <!--</div> -->
+               
+              <% } %>
+              <p class="fw-bold pt-4">Grand Total: <%= Total %> </p>
+            </div>
+            <a href="#" class="pay btn btn-color-orange mx-auto w-100">Proceed to payment</a>
+            
+
+        </div>
+    </div>
+</section>
+<script>
+    window.onload=()=>{
+    let id=localStorage.getItem('authId');
+    let token=localStorage.getItem('authToken');
+    let url=`http://localhost:5000/checkout/pay/${id.toString()}`
+     let header = {
+                'Content-type': 'application/json',
+                'token': `Bearer ${token.toString()}`
+            }
+    let options= {
+                method: 'GET',
+                headers: header
+            }
+    document.querySelector('.pay').onclick=(e)=>{
+        e.preventDefault;
+            fetch(url, options).then(res=>{
+                if(res.ok) {console.log('Payment Initialized');
+                return res.json();
+                }
+            })
+            .then(res=>{
+                newUrl=res.authorization_url;
+                window.location.href=newUrl;
+            })
+        }
+    }
+</script>
+
+
+
+<%- include ('./footer') %>

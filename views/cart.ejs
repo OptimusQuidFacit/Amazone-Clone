@@ -1,0 +1,125 @@
+<%- include('./header') %>
+<main>
+
+<section>
+    <div class="m-5 productdetails-body">
+        <div class="mx-auto bg-white p-5 rounded-3">
+            <div class="heading d-flex">
+                <h1 class="fs-1">Shopping Cart</h1>
+                <% if (products[0]) { %>
+                    <h2 class="ms-auto"> UserId: <%=products[0].UserId  %> </h2>
+                <% } %>
+                <hr>
+            </div>
+            <section style="max-width: 100vw" class="d-flex g-5 flex-wrap">
+            <% for( let product of products ) { %>
+            <div class="m-3 body-text d-flex align-items-center">
+                <div class="image-data"><img class="rounded-3" src=<%= product.Img %> alt=""></div>
+                <div class="ms-2">
+                    <p><span class="fw-bold">Product: </span><%= product.Title %></p>
+                    <p><span class="fw-bold">Product ID: </span><%= product.ProductId %></p>
+                    <p><span class="fw-bold">Price: </span>$<%= product.Price %></p>
+                    <div><p class="me-3 text-color-blue" id="in-stock">In stock</p> <span></span></div>
+                    <div class="mx-3 btns">
+                       <span class="fw-bold">Qty</span> <input style="width:20px" placeholder=<%=`${product.Quantity} `%> type="text" name="quantity" id="qty">
+                       <a href="#" data-id="<%=product.ProductId %>"
+                     class="btn btn-color-red mx-2 remove" >Remove</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </section>
+        </div>
+        <hr>
+        <div class="mx-auto w-100 d-flex justify-content-between">
+            <span class="fw-bold total">Grand Total: $<%= Total %></span>
+           <span class=""><a id="checkout" href="" class=" fw-bold btn btn-color-orange">Checkout</a></span>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <style>
+        .hidden{
+            display: none;
+        }
+        .image-data img{
+            width:200px;
+            height:200px;
+        }
+    </style>
+    <script>
+        window.onload=()=>{
+        let userId=localStorage.getItem('authId');
+        let userToken=localStorage.getItem('authToken');
+        document.querySelectorAll('.remove').forEach(product=>product.onclick=(e)=>{
+                        
+                        e.preventDefault();
+                        const url= `http://localhost:5000/buy/delete/${userId.toString()}?id=${product.getAttribute('data-id')}`;
+
+        fetch(url, {
+        method: 'DELETE',
+        headers: {
+            //'Accept': 'application/json, *',
+            'Content-type': 'application/json',
+            'token': `Bearer ${userToken.toString()}`
+        }, 
+    }).then(response => {
+
+        window.location.href = `/buy/${userId.toString()}`;
+        console.log('Delete successful');
+    })
+                       })
+
+        document.querySelector('#checkout').onclick=(e)=>{
+
+            let dataArray = "<%=products%>"
+            const date = new Date();
+            let id= localStorage.getItem('authId');
+            e.preventDefault();
+            let url=`http://localhost:5000/checkout/${id.toString()}`;
+            
+            let header = {
+                'Accept': 'application/json, */*',
+                'Content-type': 'application/json'
+            }
+            let fetchBody = JSON.stringify({ User: "<%=products[0].UserId%>", 
+                Date: `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}}`, 
+                Amount: "<%=Total%>"
+            });
+
+            let options= {
+                method: 'POST',
+                headers: header,
+                body: fetchBody
+            }
+            fetch(url, options).then(res=>{
+                if(res.ok) {console.log('Order Confirmed')
+                window.location.href=url;
+            }
+            })
+
+
+        }
+                      
+                    }
+        /*const href= document.querySelector('.buy-link').href;
+        document.querySelector('.buy-link').onclick=(e)=>{
+            const quantity=document.querySelector('#qty').value ? document.querySelector('#qty').value: 1;
+            document.querySelector('.buy-link').href =href +`${quantity}`;
+        }*/
+
+        document.querySelector('.product').onclick=()=>{
+        const sideMenu =document.querySelector('#sidemenu');
+            if (sideMenu.classList.contains('hidden')) {
+        sideMenu.classList.remove('hidden');
+      } else {
+        sideMenu.classList.add('hidden');
+      }
+        }
+    </script>
+    </main>
+    
+<%- include ('./footer') %>
